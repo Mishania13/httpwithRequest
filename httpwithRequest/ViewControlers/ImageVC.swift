@@ -10,7 +10,7 @@ import UIKit
 
 class ImageVC: UIViewController {
     
-    
+    //ssssss
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var activitiIndicator: UIActivityIndicatorView!
