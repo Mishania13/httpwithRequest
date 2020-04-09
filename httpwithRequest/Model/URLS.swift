@@ -9,8 +9,7 @@
 import Foundation
 
 struct URLS {
-    let imageURL = "https://static-eu.insales.ru/files/1/6033/10958737/original/Asketes.jpg"
-    let getURL = "https://jsonplaceholder.typicode.com/posts"
-    let postURL = ""
-
+    let imageURL = "https://picsum.photos/200/300"
+    let getPostURL = "https://jsonplaceholder.typicode.com/posts"
+    let gitHubUsersList = "https://api.github.com/users"
 }

@@ -10,13 +10,13 @@ import UIKit
 
 class ImageVC: UIViewController {
     
-    //ssssss
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var activitiIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        activitiIndicator.color = #colorLiteral(red: 0.2196078449, green: 0.007843137719, blue: 0.8549019694, alpha: 1)
         activitiIndicator.isHidden = true
         activitiIndicator.hidesWhenStopped = true
         fetchImage()
@@ -26,18 +26,12 @@ class ImageVC: UIViewController {
         
         activitiIndicator.isHidden = false
         activitiIndicator.startAnimating()
-        let urls = URLS()
-        guard let url = URL(string: urls.imageURL) else {return}
         
-        let session = URLSession.shared
-        session.dataTask(with: url) { (data, response, error) in
-            if let data = data, let image = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    self.activitiIndicator.stopAnimating()
-                    self.imageView.image = image
-                }
+        NetworkManager.downloadImage { (image) in
+            DispatchQueue.main.async {
+                self.activitiIndicator.stopAnimating()
+                self.imageView.image = image
             }
-        } .resume()
+        }
     }
 }
-
