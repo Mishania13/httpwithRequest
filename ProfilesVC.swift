@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CoursesVC: UIViewController {
+class ProfilesVC: UIViewController {
     
     private var profilesList = [GitProfilesList]()
     private let urlsList = URLS()
@@ -63,7 +63,7 @@ class CoursesVC: UIViewController {
 
 // MARK: Table View Data Source
 
-extension CoursesVC: UITableViewDataSource {
+extension ProfilesVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return profilesList.count
@@ -81,7 +81,7 @@ extension CoursesVC: UITableViewDataSource {
 
 // MARK: Table View Delegate
 
-extension CoursesVC: UITableViewDelegate {
+extension ProfilesVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120

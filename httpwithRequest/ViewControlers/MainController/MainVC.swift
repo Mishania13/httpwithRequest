@@ -8,12 +8,29 @@
 
 import UIKit
 
+enum Actions: String, CaseIterable {
+    case DownloadImage = "Download image"
+    case GET = "GET"
+    case POST = "POST"
+    case GithubFirstUsers = "Github first users"
+    case UploadImages = "Upload images"
+    case downloadFile = "Download File"
+}
+
 private let reuseIdentifier = "Cell"
 
 class MainVC: UICollectionViewController {
 
-    let actions = ["Download image", "GET", "POST", "Github first users", "Upload images"]
+    let actions = Actions.allCases
+    private var alert: UIAlertController!
     
+    private func showAlert() {
+        alert = UIAlertController(title: "Downloading", message: "0%", preferredStyle: .alert)
+        let cancleAction = UIAlertAction(title: "Cancle", style: .destructive)
+        
+        alert.addAction(cancleAction)
+        present(alert, animated: true)
+    }
 
     // MARK: UICollectionViewDataSource
 
@@ -26,7 +43,7 @@ class MainVC: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CollectionViewCell
         
-        cell.label.text = actions[indexPath.row]
+        cell.label.text = actions[indexPath.row].rawValue
         
         return cell
     }
@@ -35,22 +52,22 @@ class MainVC: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let action = actions[indexPath.row]
-        
+        let urls = URLS()
         switch action {
-        case "Download image":
+        case .DownloadImage:
             performSegue(withIdentifier: "ShowImage", sender: self)
-        case "GET":
+        case .GET:
             NetworkManager.getRequest()
             print("GET")
-        case "POST":
+        case .POST:
             NetworkManager.postRequest()
-        case "Github first users":
+        case .GithubFirstUsers:
             performSegue(withIdentifier: "OurUsers", sender: self)
-        case "Upload images":
-            print("Upload image")
-        
-        default:
-            break
+        case .UploadImages:
+            NetworkManager.uploadImage(url: urls.uploadImageUrl)
+        case .downloadFile:
+            showAlert()
+            print("downloading")
         }
     }
 }

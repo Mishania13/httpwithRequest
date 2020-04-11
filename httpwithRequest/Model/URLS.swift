@@ -12,4 +12,5 @@ struct URLS {
     let imageURL = "https://picsum.photos/200/300"
     let getPostURL = "https://jsonplaceholder.typicode.com/posts"
     let gitHubUsersList = "https://api.github.com/users"
+    let uploadImageUrl = "https://api.imgur.com/3/image"
 }
